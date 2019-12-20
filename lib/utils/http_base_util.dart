@@ -115,7 +115,7 @@ class HttpBaseUtil {
           queryParameters: queryParameters,
           cancelToken: cancelToken,
           options: options);
-      print("----> " +url);
+      print("----> " +response.toString());
       if (response.statusCode >= 200 && response.statusCode < 300) {
         /// 成功逻辑
         baseResponse = BaseResponse(success: true, res: response.data);

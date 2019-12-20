@@ -91,7 +91,8 @@ class MyApp extends StatelessWidget {
           onPressed: () async {
             Map map = new Map();
             map["aa"] = "a";
-           BaseResponse baseResponse  = await HttpBaseUtil().request(context, url: "" ,method: RequestMethod.post,data: map );
+            // 发送请求
+           BaseResponse baseResponse  = await HttpBaseUtil().request(context, url: "https://baidu.com" ,method: RequestMethod.post,data: map);
            if(baseResponse.success == true ){
              // 成功
            } else {
@@ -99,7 +100,7 @@ class MyApp extends StatelessWidget {
            }
           },
         ),
-        body:  card,
+        body:  new Text("点击下方按钮可请求网络"),
     ),
     );
 
