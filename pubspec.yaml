@@ -26,7 +26,9 @@ dependencies:
   connectivity: ^0.4.3+7
   local_auth: ^0.5.2+3
   get_it: ^1.0.3+2
-  dio: 2.0.2
+  dio: ^3.0.9
+  uuid: ^2.2.0
+  flutter_getuuid: ^0.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

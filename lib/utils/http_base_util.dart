@@ -102,7 +102,7 @@ class HttpBaseUtil {
     /// 配置请求类型
     if (contentType == RequestContentType.form) {
       options.contentType =
-          ContentType.parse('application/x-www-form-urlencoded');
+          ContentType.parse('application/x-www-form-urlencoded') as String;
     }
 
     /// 配置统一header

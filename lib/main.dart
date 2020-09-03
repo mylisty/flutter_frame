@@ -3,17 +3,22 @@ import 'package:flutter/services.dart';
 import "package:connectivity/connectivity.dart";
 import 'package:flutter_frame/file/IndexPage.dart';
 import 'package:flutter_frame/routePage/first_page.dart';
+import 'package:flutter_frame/routePage/index_page.dart';
 import 'package:flutter_frame/routePage/second_page.dart';
 import 'package:flutter_frame/routePage/third_page.dart';
 import 'package:flutter_frame/services/local_authentication_service.dart';
 import 'package:flutter_frame/services/service_locator.dart';
 import 'package:flutter_frame/utils/http_base_util.dart';
+import 'package:flutter_frame/utils/route.dart';
+import 'package:flutter_getuuid/flutter_getuuid.dart';
+import 'package:uuid/uuid.dart';
+import 'package:uuid/uuid_util.dart';
 
 
 void main() {
   _beforeStart();
  //  setupLocator();
-  runApp(MyApp());
+  runApp(MyApp2());
 }
 
 void _beforeStart() async {
@@ -76,9 +81,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/index': (BuildContext context) => IndexPage(),
-        '/FirstPage': (BuildContext context) => FirstPage(
-              title: '',
-            ),
+        '/FirstPage': (BuildContext context) => FirstPage(),
         '/SecondPage': (BuildContext context) => SecondPage(),
         '/ThridPage': (BuildContext context) => ThridPage(),
       },
@@ -89,15 +92,20 @@ class MyApp extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () async {
-            Map map = new Map();
+
+            /*Map map = new Map();
             map["aa"] = "a";
             // 发送请求
-           BaseResponse baseResponse  = await HttpBaseUtil().request(context, url: "https://baidu.com" ,method: RequestMethod.post,data: map);
+           BaseResponse baseResponse  = await HttpBaseUtil().request(context, url: "http://baidu.com" ,method: RequestMethod.get);
            if(baseResponse.success == true ){
+             print("aaaaaaaaaaaaa "+ baseResponse.res.toString());
              // 成功
            } else {
              // 失败
+             print("aaaaaaaaaaaaa  error ");
            }
+           var uuid = await FlutterGetuuid.platformUid;
+           print("uuid "+ uuid);*/
           },
         ),
         body:  new Text("点击下方按钮可请求网络"),
@@ -145,10 +153,21 @@ class MyApp2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: RouteUtil.navigatorKey,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      routes: {
+        '/home': (BuildContext context) => MyHomePage(),
+        '/index': (BuildContext context) => IndexPage(),
+        '/indexS': (BuildContext context) => IndexsPage(),
+        '/FirstPage': (BuildContext context) => FirstPage(
+          title: '',
+        ),
+        '/SecondPage': (BuildContext context) => SecondPage(),
+        '/ThridPage': (BuildContext context) => ThridPage(),
+      },
       home: MyHomePage(),
     );
   }
@@ -160,8 +179,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final LocalAuthenticationService _localAuth = locator<LocalAuthenticationService>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -175,7 +192,10 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: RaisedButton(
           child: Text('authenticate'),
-          onPressed: _localAuth.authenticate,
+          onPressed: () async {
+            RouteUtil.closePage(context);
+            RouteUtil.pushPage(context, IndexsPage());
+          },
         ),
       ),
     );

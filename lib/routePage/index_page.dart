@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_frame/utils/route.dart';
+
+import 'first_page.dart';
 
 
 class IndexsPage extends StatefulWidget {
@@ -25,11 +28,14 @@ class  IndexsState extends State<IndexsPage>{
           Navigator.of(context).pushNamed("/FirstPage",arguments: 'aaa').then((value){
             print("value " + value.toString());
           });
-//         Navigator.push(context,new MaterialPageRoute(builder: (BuildContext context) {
-//            return FirstPage();
-//          })).then((Object value) {
-//            print("value "+ value.toString());
-//          });
+       /*RouteUtil.pushPage(context, FirstPage(),callBack: (data) {
+         print("value "+ data.toString());
+       });*/
+        /* Navigator.push(context,new MaterialPageRoute(builder: (BuildContext context) {
+            return FirstPage();
+          })).then((Object value) {
+            print("value "+ value.toString());
+          });*/
         },
           child: Text("IndexPage"),
         ),

@@ -1,11 +1,8 @@
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-
-import 'package:flutter_frame/MyHomePage.dart';
-import 'package:flutter_frame/file/IndexPage.dart';
-import 'package:flutter_frame/routePage/third_page.dart';
-
+import 'package:flutter_frame/utils/route.dart';
+import '../Test.dart';
 class SecondPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -27,16 +24,11 @@ class SecondState extends State<SecondPage>{
     return Scaffold(
       body: new Center(
         child: RaisedButton(onPressed: () {
-     //     Navigator.of(context).pushNamed("/ThridPage");
-          Navigator.of(context).pushNamed("/ThridPage").then((value) {
-            print("value2 "+ value.toString());
-            Navigator.of(context).pop(value.toString());
+          RouteUtil.pushNamed(context, "/ThridPage",callBack: (value) {
+            print("value2 " + value.toString());
+            Test2 fromJson = new Test2().fromJson(value);
+            print("value2 ${fromJson.name}");
           });
-         /* Navigator.push(context,new MaterialPageRoute(builder: (BuildContext context) {
-            return ThridPage();
-          })).then((Object value) {
-            print("value "+ value.toString());
-          });*/
         },
           child: Text("SecondPage"),
         ),
