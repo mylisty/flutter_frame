@@ -35,14 +35,14 @@ class _MyHomePageState extends State<RefreshList> {
   static var myLPI = new LinearProgressIndicator(
     backgroundColor: Colors.grey,
     valueColor: lAnimColor,
-    value: 0.5,
+    value: 0.1,
   );
 
   //环形进度条
   static var myCPI = new CircularProgressIndicator(
     backgroundColor: Colors.grey,
     valueColor: cAnimColor,
-    value: 0.8,
+    value: 0.1,
   );
 
   //ProgressIndicator 演示
@@ -82,6 +82,7 @@ class _MyHomePageState extends State<RefreshList> {
         visible: loadStatus == LoadingStatus.STATUS_LOADING ? true : false,
         child: SizedBox(
           child: CircularProgressIndicator(
+              strokeWidth: 3,
               valueColor: AlwaysStoppedAnimation(Colors.blue)),
           width: 20.0,
           height: 20.0,
@@ -109,7 +110,7 @@ class _MyHomePageState extends State<RefreshList> {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         //此时加载下一页数据
-      //  _getMoreData();
+        _getMoreData();
       }
     });
   }

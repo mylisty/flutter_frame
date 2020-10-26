@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'package:common_utils/common_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
+
+import 'package:flutter_frame/utils/route.dart';
 
 /// 请求方式
 enum RequestMethod {
@@ -128,8 +131,10 @@ class HttpBaseUtil {
         if (response.statusCode == 401) {
           errorCode = 401;
           errorMessage = "登录信息过期";
-        }else {
+          // token 失效时 退出
+          //     RouteUtil.pushPageWithNoContext("/login");
 
+        }else {
           if (response != null) {
             if (response.data is String) {
               errorCode = -1;
@@ -161,8 +166,8 @@ class HttpBaseUtil {
         errorCode = error.response.data['code'] ?? -1;
         errorMessage = (error.response.data['message'] ?? error.message) ??
             '网络请求失败, 请稍后重试：E104';
-
-
+        // token 失效时 退出
+      //     RouteUtil.pushPageWithNoContext("/login");
       }else {
         if (error.response != null) {
           if (error.response.data is String) {
