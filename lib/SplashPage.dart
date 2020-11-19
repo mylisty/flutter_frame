@@ -2,8 +2,6 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_frame/materialApp/materal.dart';
-import 'package:flutter_frame/routePage/index_page.dart';
-import 'package:flutter_frame/utils/http_base_util.dart';
 
 
 class SplashPage extends StatefulWidget {

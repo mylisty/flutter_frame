@@ -109,7 +109,7 @@ void _beforeStart() async {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-
+ GlobalKey globalKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,9 +142,11 @@ class MyApp extends StatelessWidget {
               RaisedButton(
                 onPressed: () {
                   // 刷新页面
-                  RouteUtil.pushPage(context, ProviderPageDemo());
+//                  RouteUtil.pushPage(context, ProviderPageDemo());
+                  RouteUtil.pushPageAboutCircle(context, new FirstPage(),key: globalKey);
                 },
                 child: Text("ListView"),
+                key: globalKey,
               ),
             ],
           )
@@ -233,7 +235,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Text('authenticate'),
           onPressed: () async {
             RouteUtil.closePage(context);
-            RouteUtil.pushPage(context, IndexsPage());
+            RouteUtil.pushPage(context, IndexsPage(),);
           },
         ),
       ),

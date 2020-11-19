@@ -38,6 +38,7 @@ class FirstState extends State<FirstPage>{
   Widget build(BuildContext context) {
     String tmp = ModalRoute.of(context).settings.arguments.toString();
     return Scaffold(
+      backgroundColor: Colors.blue,
       body: new Center(
         child: RaisedButton(onPressed: () {
           print("object "+ tmp);

@@ -1,6 +1,7 @@
-
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'circle_page_route.dart';
 
 class RouteUtil {
   //全局key
@@ -13,16 +14,21 @@ class RouteUtil {
         MaterialPageRoute(builder: (ctx) => page),
         (Route<dynamic> route) => false);
   }
-
+  /// // RouteSettings(
+  //    arguments: bean  ,
+  //  ),
+  //  )
+  //  下一个页面获取    final Bean bean   = ModalRoute.of(context).settings.arguments;
   static void pushPage(
     BuildContext context,
     Widget page, {
     bool needLogin = false,
     bool shouldReplace = false,
     Function callBack,
+    RouteSettings settings, // 可传递下一个页面数据
   }) {
     PageRoute pageRoute =
-        MaterialPageRoute(builder: (BuildContext context) => page);
+        MaterialPageRoute(builder: (BuildContext context) => page,settings: settings);
     if (context == null || page == null) return;
     if (shouldReplace) {
       Navigator.of(context).pushReplacement(pageRoute).then((data) {
@@ -98,6 +104,25 @@ class RouteUtil {
   static void pushPageLogIn(String routeName) {
     RouteUtil.navigatorKey.currentState.pushNamedAndRemoveUntil(routeName,
         ModalRoute.withName("/"));
+  }
+  ///圆形方式打开页面
+  ///[context]当前页面的Context
+  ///[page]将要打开的页面
+  ///[openOffset]打开页面的显示中心
+  static pushPageAboutCircle(BuildContext context, Widget page,
+      {Offset openOffset, GlobalKey key}) {
+    /// MODIFIED: 2020/9/22 15:40 kennen  iOS使用默认动画，否则跳转进入登录页面无法返回
+    if (Platform.isIOS) {
+      pushPage(context, page);
+    } else {
+      Navigator.of(context).push(CirclePageRoute(
+          context: context,
+          centerOffset: openOffset,
+          key: key,
+          builder: (context) {
+            return page;
+          }));
+    }
   }
 }
 
